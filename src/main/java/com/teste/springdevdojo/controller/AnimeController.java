@@ -2,6 +2,8 @@ package com.teste.springdevdojo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.springdevdojo.domain.Anime;
+import com.teste.springdevdojo.request.AnimePostRequestBody;
 import com.teste.springdevdojo.request.AnimePutRequestBody;
 import com.teste.springdevdojo.service.AnimeService;
 import com.teste.springdevdojo.util.DateUtil;
@@ -48,9 +51,13 @@ public class AnimeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Anime> save(@RequestBody Anime newAnime){
+	public ResponseEntity<Anime> save(@RequestBody @Valid Anime newAnime){
 		return ResponseEntity.ok().body(animeService.save(newAnime));
 	}
+	
+//    public ResponseEntity<Anime> save(@RequestBody @Valid AnimePostRequestBody animePostRequestBody) {
+//        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
+//    }
 	
 	@DeleteMapping(path = "/{id}")
 	public  void delete(@PathVariable long id) {
@@ -58,7 +65,7 @@ public class AnimeController {
 	}
 	
 	@PutMapping
-    public ResponseEntity<Void> update(@RequestBody AnimePutRequestBody animeUpdate) {
+    public ResponseEntity<Void> update(@RequestBody @Valid AnimePutRequestBody animeUpdate) {
         animeService.update(animeUpdate);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
