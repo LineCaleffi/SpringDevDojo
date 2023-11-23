@@ -1,5 +1,6 @@
 package com.teste.springdevdojo.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.springdevdojo.domain.Anime;
-import com.teste.springdevdojo.request.AnimePostRequestBody;
 import com.teste.springdevdojo.request.AnimePutRequestBody;
 import com.teste.springdevdojo.service.AnimeService;
 import com.teste.springdevdojo.util.DateUtil;
@@ -36,7 +36,7 @@ public class AnimeController {
 
 	@GetMapping
 	public ResponseEntity<List<Anime>> listAll() {
-		//log.info(dateUtil.formatLoalDateTime(LocalDateTime.now()));
+		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 		return ResponseEntity.ok(animeService.listAll());
 	}
 	
