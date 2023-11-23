@@ -2,6 +2,8 @@ package com.teste.springdevdojo.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +36,10 @@ public class AnimeService {
 		animeRepository.deleteById(id);
 	}
 	
+	@Transactional
 	public Anime save(Anime animePostRequestBody) {
 		return animeRepository.save(animePostRequestBody);
+		
 		// return
 		// animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
 	}
