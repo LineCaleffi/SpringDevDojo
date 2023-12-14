@@ -42,6 +42,12 @@ public class AnimeController {
 		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 		return ResponseEntity.ok(animeService.listAll(pageable));
 	}
+	
+	@GetMapping(path = "/all")
+	public ResponseEntity<List<Anime>> listAllSemPaginacao() {
+		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+		return ResponseEntity.ok(animeService.listAllSemPaginacao()); 
+	}
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Anime> findById(@PathVariable long id) {
@@ -79,12 +85,6 @@ public class AnimeController {
  * animePostRequestBody) { 
  * 	return new ResponseEntity<>(animeService.save(animePostRequestBody),
  * 	HttpStatus.CREATED); 
- * }
- * 
- * ****** Modo sem paginação ********
- * public ResponseEntity<List<Anime>> listAll() {
- * 		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
- * 		return ResponseEntity.ok(animeService.listAll()); 
  * }
  * 
  */
