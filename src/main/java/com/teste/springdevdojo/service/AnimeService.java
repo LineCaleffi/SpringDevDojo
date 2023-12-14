@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.teste.springdevdojo.domain.Anime;
@@ -20,8 +22,13 @@ public class AnimeService {
 	@Autowired
 	private AnimeRepository animeRepository;
 
-	public List<Anime> listAll() {
-		return animeRepository.findAll();
+//	public List<Anime> listAll() {
+//		return animeRepository.findAll();
+//	}
+
+	/* para paginação */
+	public Page<Anime> listAll(Pageable pageable) {
+		return animeRepository.findAll(pageable);
 	}
 
 	public List<Anime> findByName(String name) {
@@ -35,21 +42,21 @@ public class AnimeService {
 	public void delete(long id) {
 		animeRepository.deleteById(id);
 	}
-	
+
 	@Transactional
 	public Anime save(Anime animePostRequestBody) {
 		return animeRepository.save(animePostRequestBody);
-		
+
 		// return
 		// animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
 	}
-	
+
 	public void update(AnimePutRequestBody animeUpdate) {
 		Anime savedAnime = findById(animeUpdate.getId());
 		Anime anime = Anime.builder().id(savedAnime.getId()).name(animeUpdate.getName()).build();
-		//Anime anime = AnimeMapper.INSTANCE.toAnime(animeUpdate);
-		//anime.setId(savedAnime.getId());
-		
+		// Anime anime = AnimeMapper.INSTANCE.toAnime(animeUpdate);
+		// anime.setId(savedAnime.getId());
+
 		animeRepository.save(anime);
 	}
 
