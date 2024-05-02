@@ -1,5 +1,7 @@
 package com.teste.springdevdojo.repository;
 
+import java.util.Optional;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +44,20 @@ class AnimeRepositoryTest {
         Assertions.assertThat(animeSaved.getName()).isEqualTo(animeSaved.getName());	
     }
 	
-
+	@Test
+	@DisplayName("Anime Deletado com sucesso")
+	void deleteSuccess() {
+		Anime anime = createAnime();
+		Anime animeSaved = this.animeRepository.save(anime);
+		
+		this.animeRepository.delete(animeSaved);
+		this.animeRepository.findById(animeSaved.getId());
+		
+		Optional<Anime> animeOp = this.animeRepository.findById(animeSaved.getId());
+		Assertions.assertThat(animeOp.isEmpty()).isTrue();
+		
+    }
+	
 	private Anime createAnime() {
 		return Anime.builder().name("Naruto").build();
 	}
