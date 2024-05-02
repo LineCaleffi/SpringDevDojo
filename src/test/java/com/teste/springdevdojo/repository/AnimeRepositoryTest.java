@@ -3,12 +3,13 @@ package com.teste.springdevdojo.repository;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.ConstraintViolationException;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import com.teste.springdevdojo.domain.Anime;
 
 @DataJpaTest
@@ -83,4 +84,7 @@ class AnimeRepositoryTest {
 	private Anime createAnime() {
 		return Anime.builder().name("Naruto").build();
 	}
+	
+	
+	
 }
