@@ -1,5 +1,6 @@
 package com.teste.springdevdojo.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -55,6 +56,20 @@ class AnimeRepositoryTest {
 		
 		Optional<Anime> animeOp = this.animeRepository.findById(animeSaved.getId());
 		Assertions.assertThat(animeOp.isEmpty()).isTrue();
+		
+    }
+	
+	@Test
+	@DisplayName("F	ind by name")
+	void findByName_returnList_Success() {
+		Anime anime = createAnime();
+		Anime animeSaved = this.animeRepository.save(anime);
+		
+		String name = animeSaved.getName();
+		List<Anime> animes = this.animeRepository.findByName(name);
+		
+		Assertions.assertThat(animes).isNotEmpty();
+		Assertions.assertThat(animes).contains(animeSaved);
 		
     }
 	
