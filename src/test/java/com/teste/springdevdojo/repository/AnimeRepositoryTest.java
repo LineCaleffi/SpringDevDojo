@@ -78,7 +78,7 @@ class AnimeRepositoryTest {
         List<Anime> animes = this.animeRepository.findByName("xx");
 
         Assertions.assertThat(animes).isEmpty();
-    }
+    } // aula 31
 	
 	private Anime createAnime() {
 		return Anime.builder().name("Naruto").build();
