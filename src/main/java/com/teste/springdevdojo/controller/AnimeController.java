@@ -1,6 +1,5 @@
 package com.teste.springdevdojo.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,30 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.teste.springdevdojo.domain.Anime;
 import com.teste.springdevdojo.request.AnimePutRequestBody;
 import com.teste.springdevdojo.service.AnimeService;
-import com.teste.springdevdojo.util.DateUtil;
-
-import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("animes")
-@Log4j2
+//@Log4j2
 public class AnimeController {
-	@Autowired
-	private DateUtil dateUtil;
-
 	@Autowired
 	private AnimeService animeService;
 
 	@GetMapping
 	/* para paginação */
 	public ResponseEntity<Page<Anime>> listAll(Pageable pageable) {
-		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 		return ResponseEntity.ok(animeService.listAll(pageable));
 	}
 	
 	@GetMapping(path = "/all")
 	public ResponseEntity<List<Anime>> listAllSemPaginacao() {
-		log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 		return ResponseEntity.ok(animeService.listAllSemPaginacao()); 
 	}
 

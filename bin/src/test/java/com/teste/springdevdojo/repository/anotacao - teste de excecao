@@ -1,0 +1,26 @@
+
+	@Test
+	@DisplayName("Retorna uma lista vazia quando nenhum anime for encontrado")
+	void findByName_returnList_NotFound() {
+        List<Anime> animes = this.animeRepository.findByName("xx");
+
+        Assertions.assertThat(animes).isEmpty();
+    } // aula 31
+	
+	private Anime createAnime() {
+		return Anime.builder().name("Naruto").build();
+	}
+	
+	
+	
+	@Test
+	@DisplayName("Teste de exceção quando o nome estiver vazio (save)")
+	void saveThrows_WhenNameIsEmpty() {
+		Anime anime = createAnime();
+//      Assertions.assertThatThrownBy(() -> this.animeRepository.save(anime))
+//      .isInstanceOf(ConstraintViolationException.class);
+		
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
+          .isThrownBy(() -> this.animeRepository.save(anime))
+          .withMessageContaining("O nome do anime não pode ser vazio");
+    }
