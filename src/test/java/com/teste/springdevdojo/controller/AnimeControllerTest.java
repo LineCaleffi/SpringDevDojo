@@ -28,7 +28,7 @@ public class AnimeControllerTest {
 	@Mock
 	private AnimeService animeService;
 	
-	@BeforeEach
+	@BeforeEach // é usada para indicar um método a ser executado antes de cada método de teste
 	void setUp() {
 		PageImpl<Anime> animePage = new PageImpl<>(List.of(AnimeCreator.createAnimeValido()));
 		BDDMockito.when(animeService.listAll(ArgumentMatchers.any())).thenReturn(animePage); //quando executar uma chamada para listAll() retorna animePage
